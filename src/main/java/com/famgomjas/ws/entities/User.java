@@ -1,11 +1,22 @@
 package com.famgomjas.ws.entities;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="users")
@@ -40,6 +51,10 @@ public class User {
 	@Column(name="is_active", nullable=false, columnDefinition="BIT", length=1)
     private boolean isActive;
 	
+	@ManyToMany
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@JsonManagedReference
+	private Collection<Role> roles;
 	
 
 	public Long getUserId() {
@@ -113,7 +128,12 @@ public class User {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	
-	
-	
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
 }
