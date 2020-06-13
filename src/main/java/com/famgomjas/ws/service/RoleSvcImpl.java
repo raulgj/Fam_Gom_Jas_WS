@@ -6,10 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.famgomjas.ws.dao.RoleDao;
-import com.famgomjas.ws.dao.UserDao;
 import com.famgomjas.ws.entities.Role;
 import com.famgomjas.ws.entities.User;
+import com.famgomjas.ws.repository.RoleDao;
+import com.famgomjas.ws.repository.UserRepository;
 
 @Service
 public class RoleSvcImpl implements RoleSvc {
@@ -30,4 +30,11 @@ public class RoleSvcImpl implements RoleSvc {
 	public void save(Role t) {
 		roleDao.save(t);
 	}
+
+	@Override
+	public Role findFirstByName(String name) {
+		return roleDao.findFirstByName(name);
+	}
+	
+	
 }

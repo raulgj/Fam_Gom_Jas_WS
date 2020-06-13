@@ -1,6 +1,8 @@
 package com.famgomjas.ws.entities;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class User {
 
 	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="user_id")
     private Long userId;
 	
@@ -43,7 +45,7 @@ public class User {
     private String lastNameMother;
 	
 	@Column(name="birthdate")
-    private String birthdate;
+    private Calendar birthdate;
 	
 	@Column(name="gender")
     private String gender;
@@ -105,11 +107,11 @@ public class User {
 		this.lastNameMother = lastNameMother;
 	}
 
-	public String getBirthdate() {
+	public Calendar getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(String birthdate) {
+	public void setBirthdate(Calendar birthdate) {
 		this.birthdate = birthdate;
 	}
 
@@ -136,4 +138,34 @@ public class User {
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
+	
+	public User() {
+		
+	}
+
+	public User(Long userId, String user, String password, String name, String lastName, String lastNameMother, Calendar birthdate, String gender, boolean isActive, Collection<Role> roles) {
+		this.userId = userId;
+		this.user = user;
+		this.password = password;
+		this.name = name;
+		this.lastName = lastName;
+		this.lastNameMother = lastNameMother;
+		this.birthdate = birthdate;
+		this.gender = gender;
+		this.isActive = isActive;
+		this.roles = roles;
+	}
+	
+	public User(String user, String password, String name, String lastName, String lastNameMother, Calendar birthdate, String gender, Collection<Role> roles) {
+		this.user = user;
+		this.password = password;
+		this.name = name;
+		this.lastName = lastName;
+		this.lastNameMother = lastNameMother;
+		this.birthdate = birthdate;
+		this.gender = gender;
+		this.roles = roles;
+	}
+	
+	
 }

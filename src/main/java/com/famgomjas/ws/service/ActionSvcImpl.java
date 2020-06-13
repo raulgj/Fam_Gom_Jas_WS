@@ -6,10 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.famgomjas.ws.dao.ActionDao;
-import com.famgomjas.ws.dao.UserDao;
 import com.famgomjas.ws.entities.Action;
 import com.famgomjas.ws.entities.User;
+import com.famgomjas.ws.repository.ActionDao;
+import com.famgomjas.ws.repository.UserRepository;
 
 @Service
 public class ActionSvcImpl implements ActionSvc {

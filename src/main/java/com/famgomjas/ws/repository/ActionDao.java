@@ -1,4 +1,4 @@
-package com.famgomjas.ws.dao;
+package com.famgomjas.ws.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
