@@ -1,24 +1,22 @@
-package com.famgomjas.ws.service;
+package com.famgomjas.ws.jwt;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.famgomjas.ws.entities.Action;
-import com.famgomjas.ws.entities.Role;
-import com.famgomjas.ws.entities.User;
+import com.famgomjas.ws.entities.TRole;
+import com.famgomjas.ws.entities.TUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	private int id;
 
 	private String username;
 
@@ -32,7 +30,7 @@ public class UserDetailsImpl implements UserDetails {
 		return authorities;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -66,22 +64,18 @@ public class UserDetailsImpl implements UserDetails {
 		return true;
 	}
 	
-	public UserDetailsImpl(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+	public UserDetailsImpl(int id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.authorities = authorities;
 	}
 
-	public static UserDetailsImpl build(User user) {
+	public static UserDetailsImpl build(TUser user) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		
-		for (Role role : user.getRoles()) {
+		for (TRole role : user.getTRoles()) {
 			authorities.add(new SimpleGrantedAuthority(role.getName()));
-			
-			for (Action action : role.getActions()) {
-				authorities.add(new SimpleGrantedAuthority(action.getName()));
-			}
 		}
 
 		return new UserDetailsImpl(user.getUserId(), user.getUser(), user.getPassword(), authorities);

@@ -1,16 +1,12 @@
 package com.famgomjas.ws.requestBody;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.famgomjas.ws.util.Constants;
 import com.famgomjas.ws.validator.EnumList;
@@ -35,8 +31,8 @@ public class RegisterRequest {
 	private String lastNameMother;
 	
 	@NotNull(message = "La fecha de nacimiento no puede estar vacio")
-	@Past(message = "La fech de nacimeinto no es valida")
-	private Calendar birthdate;
+	@Past(message = "La fecha de nacimeinto no es valida")
+	private Date birthdate;
 	
 	@EnumList(targetClassType=Constants.GENDERS.class, message="El genero no es valido")
 	private String gender;
@@ -82,11 +78,11 @@ public class RegisterRequest {
 		this.lastNameMother = lastNameMother;
 	}
 
-	public Calendar getBirthdate() {
+	public Date getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(Calendar birthdate) {
+	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
 

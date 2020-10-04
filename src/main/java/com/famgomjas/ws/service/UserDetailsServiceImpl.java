@@ -7,17 +7,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.famgomjas.ws.entities.User;
+import com.famgomjas.ws.entities.TUser;
+import com.famgomjas.ws.jwt.UserDetailsImpl;
+import com.famgomjas.ws.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
-	UserSvc userSvc;
+	UserRepository userRepository;
 
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userSvc.loadUserByUsername(username);
+		TUser user = userRepository.findFirstByUser(username);
 		
 		if (user == null) {
 			throw new UsernameNotFoundException("User Not Found with username: " + username);
