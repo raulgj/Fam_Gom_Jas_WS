@@ -29,7 +29,6 @@ public class TEmail {
 	//bi-directional many-to-one association to TUser
 	@ManyToOne
 	@JoinColumn(name="user_id", nullable=false)
-	@JsonIgnore
 	private TUser TUser;
 
 	public TEmail() {
@@ -59,12 +58,10 @@ public class TEmail {
 		this.isActive = isActive;
 	}
 
-	@JsonIgnore
 	public TUser getTUser() {
 		return this.TUser;
 	}
 
-	@JsonIgnore
 	public void setTUser(TUser TUser) {
 		this.TUser = TUser;
 	}

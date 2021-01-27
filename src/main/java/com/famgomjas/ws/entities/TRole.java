@@ -30,7 +30,6 @@ public class TRole {
 	private String name;
 
 	@ManyToMany(mappedBy="TRoles")
-	@JsonIgnore
 	private List<TUser> TUsers;
 
 	public TRole() {
@@ -60,12 +59,10 @@ public class TRole {
 		this.name = name;
 	}
 
-	@JsonIgnore
 	public List<TUser> getTUsers() {
 		return this.TUsers;
 	}
 
-	@JsonIgnore
 	public void setTUsers(List<TUser> TUsers) {
 		this.TUsers = TUsers;
 	}

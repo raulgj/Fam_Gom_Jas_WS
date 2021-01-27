@@ -2,11 +2,6 @@ package com.famgomjas.ws.entities;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import java.util.List;
 
 
@@ -34,7 +29,6 @@ public class TGroup {
 	private List<TEvent> TEvents;
 
 	@ManyToMany(mappedBy="TGroups")
-	@JsonIgnore
 	private List<TUser> TUsers;
 
 	public TGroup() {
@@ -86,12 +80,10 @@ public class TGroup {
 		return TEvent;
 	}
 
-	@JsonIgnore
 	public List<TUser> getTUsers() {
 		return this.TUsers;
 	}
 
-	@JsonIgnore
 	public void setTUsers(List<TUser> TUsers) {
 		this.TUsers = TUsers;
 	}
