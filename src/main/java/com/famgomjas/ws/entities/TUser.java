@@ -2,7 +2,9 @@ package com.famgomjas.ws.entities;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 
@@ -23,10 +28,9 @@ import javax.persistence.JoinColumn;
  */
 @Entity
 @Table(name="t_user")
-public class TUser {
-	
+public class TUser{
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="user_id", unique=true, nullable=false)
 	private int userId;
 
@@ -67,9 +71,9 @@ public class TUser {
 	@OneToMany(mappedBy="TUser")
 	private List<TPhone> TPhones;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="t_user_group", joinColumns={@JoinColumn(name="user_id", nullable=false)}, inverseJoinColumns={@JoinColumn(name="group_id", nullable=false)})
-	private List<TGroup> TGroups;
+	private Set<TGroup> TGroups;
 
 	@ManyToMany
 	@JoinTable(name="t_user_role", joinColumns={@JoinColumn(name="user_id", nullable=false)}, inverseJoinColumns={@JoinColumn(name="role_id", nullable=false)})
@@ -238,11 +242,11 @@ public class TUser {
 		return TPhone;
 	}
 
-	public List<TGroup> getTGroups() {
+	public Set<TGroup> getTGroups() {
 		return this.TGroups;
 	}
 
-	public void setTGroups(List<TGroup> TGroups) {
+	public void setTGroups(Set<TGroup> TGroups) {
 		this.TGroups = TGroups;
 	}
 

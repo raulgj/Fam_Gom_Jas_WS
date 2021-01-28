@@ -3,6 +3,7 @@ package com.famgomjas.ws.entities;
 import javax.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -12,7 +13,6 @@ import java.util.List;
 @Entity
 @Table(name="t_group")
 public class TGroup {
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="group_id", unique=true, nullable=false)
@@ -24,12 +24,11 @@ public class TGroup {
 	@Column(nullable=false, length=45)
 	private String name;
 
-	//bi-directional many-to-one association to TEvent
 	@OneToMany(mappedBy="TGroup")
 	private List<TEvent> TEvents;
 
 	@ManyToMany(mappedBy="TGroups")
-	private List<TUser> TUsers;
+	private Set<TUser> TUsers;
 
 	public TGroup() {
 	}
@@ -80,11 +79,11 @@ public class TGroup {
 		return TEvent;
 	}
 
-	public List<TUser> getTUsers() {
+	public Set<TUser> getTUsers() {
 		return this.TUsers;
 	}
 
-	public void setTUsers(List<TUser> TUsers) {
+	public void setTUsers(Set<TUser> TUsers) {
 		this.TUsers = TUsers;
 	}
 
